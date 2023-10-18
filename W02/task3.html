@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>W02: task 03</title>
+</head>
+<body>
+  <h1>三角形の面積計算</h1>
+
+  <div>
+    <label for="x0">点0 (x, y, z):</label>
+    <input type="number" id="x0" placeholder="x0">
+    <input type="number" id="y0" placeholder="y0">
+    <input type="number" id="z0" placeholder="z0">
+  </div>
+
+  <div>
+    <label for="x1">点1 (x, y, z):</label>
+    <input type="number" id="x1" placeholder="x1">
+    <input type="number" id="y1" placeholder="y1">
+    <input type="number" id="z1" placeholder="z1">
+  </div>
+
+  <div>
+    <label for="x2">点2 (x, y, z):</label>
+    <input type="number" id="x2" placeholder="x2">
+    <input type="number" id="y2" placeholder="y2">
+    <input type="number" id="z2" placeholder="z2">
+  </div>
+
+  <button onclick="calculateArea()">面積計算</button>
+
+  <p>結果: <span id="result">ここに結果が表示されます</span></p>
+
+  <script>
+    function calculateArea() {
+      const x0 = parseFloat(document.getElementById("x0").value);
+      const y0 = parseFloat(document.getElementById("y0").value);
+      const z0 = parseFloat(document.getElementById("z0").value);
+      const x1 = parseFloat(document.getElementById("x1").value);
+      const y1 = parseFloat(document.getElementById("y1").value);
+      const z1 = parseFloat(document.getElementById("z1").value);
+      const x2 = parseFloat(document.getElementById("x2").value);
+      const y2 = parseFloat(document.getElementById("y2").value);
+      const z2 = parseFloat(document.getElementById("z2").value);
+
+      // 三角形の面積計算
+      const area = calculateTriangleArea(x0, y0, z0, x1, y1, z1, x2, y2, z2);
+
+      const resultElement = document.getElementById("result");
+      resultElement.textContent = `三角形の面積は ${area.toFixed(2)} です。`;
+    }
+
+    function calculateTriangleArea(x0, y0, z0, x1, y1, z1, x2, y2, z2) {
+      const a = Math.sqrt((x0 - x1) ** 2 + (y0 - y1) ** 2 + (z0 - z1) ** 2);
+      const b = Math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2 + (z1 - z2) ** 2);
+      const c = Math.sqrt((x2 - x0) ** 2 + (y2 - y0) ** 2 + (z2 - z0) ** 2);
+      const s = (a + b + c) / 2;
+
+      return Math.sqrt(s * (s - a) * (s - b) * (s - c));
+    }
+  </script>
+</body>
+</html>
