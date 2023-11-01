@@ -1,26 +1,14 @@
-<!DOCTYPE html>
 <html>
     <head>
         <title>W04: Example 01</title>
-        <!-- Include D3.js library -->
-        <script src="https://d3js.org/d3.v7.min.js"></script>
     </head>
     <body>
+        <script src="https://d3js.org/d3.v4.min.js"></script>
         <script>
-            // SVG要素を追加
-            var svg = d3.select("body").append("svg");
-
-            // CSVファイルからデータを読み込み、データを使用して円を描画
-            d3.csv("https://masahiro1113.github.io/JavaScript/W04/data.csv", function(data) {
-                svg.selectAll("circle")
-                    .data(data)
-                    .enter()
-                    .append("circle")
-                    .attr("cx", function(d) { return +d.x; }) // x座標
-                    .attr("cy", function(d) { return +d.y; }) // y座標
-                    .attr("r", function(d) { return +d.r; })  // 円の半径
-                    .attr("fill", "steelblue"); // 円の色
-            });
+        var span = d3.select("body").append("span");
+        span.text("Hello D3!");
+        span.style("font-size","50px");
+        span.style("font-weight","bold");
         </script>
     </body>
 </html>
