@@ -17,13 +17,7 @@
             .attr("height", function(d){ return d.height; })
             .style("fill", function(d){ return d.color; })
         
-        svg.selectAll("text")
-        .data(data)
-            .enter()
-	        .append("text")
-	        .attr("x", function(d){ return d.x + (d.width / 2); }) 
-	        .attr("y", function(d){ return d.y + (d.height / 2); }) 
-	        .text(function(d) { return d.label; }) 
+        
 	        
 			
 	 } );
