@@ -11,7 +11,7 @@
             var svg = d3.select("body").append("svg");
 
             // CSVファイルからデータを読み込み、データを使用して円を描画
-            d3.csv("https://Masahiro1113.github.io/JavaScript/W04/data.csv", function(data) {
+            d3.csv("https://masahiro1113.github.io/JavaScript/W04/data.csv", function(data) {
                 svg.selectAll("circle")
                     .data(data)
                     .enter()
