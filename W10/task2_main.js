@@ -72,7 +72,7 @@ class ScatterPlot {
 
         self.svg.append("g")
             .append("text")
-            .attr('transform', `translate(${self.config.width / 2}, ${self.inner_height + 110})`)
+            .attr('transform', `translate(${self.config.width / 2}, ${self.inner_height + 150})`)
             .attr("fill", "black")
             .attr("text-anchor", "middle")
             .attr("font-size", "10pt")
@@ -102,7 +102,7 @@ class ScatterPlot {
     }
 
     showTooltip(x, y, text) {
-        const tooltip = d3.select('#tooltip');  // ツールチップの選択
+        const tooltip = d3.select('#tooltip');  /
         tooltip
             .style('opacity', 1)
             .html(`<div class="tooltip-label">${text}</div>${x}, ${y}`)
