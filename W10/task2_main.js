@@ -6,7 +6,7 @@ d3.csv("https://Masahiro1113.github.io/JavaScript/W04/data.csv")
             parent: '#drawing_region',
             width: 500,
             height: 500,
-            margin: { top: 50, right: 100, bottom: 150, left: 100 }
+            margin: { top: 100, right: 100, bottom: 200, left: 100 }
         };
 
         const scatter_plot = new ScatterPlot(config, data);
@@ -25,7 +25,7 @@ class ScatterPlot {
             width: config.width || 250,
             height: config.height || 250,
             margin: config.margin || { top: 10, right: 10, bottom: 10, left: 10 }
-        }
+        };
         this.data = data;
         this.init();
     }
@@ -88,7 +88,7 @@ class ScatterPlot {
             .attr("font-weight", "bold")
             .text("Y Label");
 
-       
+        // ツールチップの追加
         self.tooltip = d3.select(self.config.parent)
             .append('div')
             .attr('id', 'tooltip')
@@ -99,6 +99,20 @@ class ScatterPlot {
             .style('border-width', '1px')
             .style('border-radius', '5px')
             .style('padding', '10px');
+    }
+
+    showTooltip(x, y, text) {
+        this.tooltip
+            .style('opacity', 1)
+            .html(`<div class="tooltip-label">${text}</div>${x}, ${y}`)
+            .style('background-color', 'lightsteelblue')
+            .style('border-color', 'steelblue')
+            .style('left', (d3.event.pageX + 10) + 'px')
+            .style('top', (d3.event.pageY + 10) + 'px');
+    }
+
+    hideTooltip() {
+        this.tooltip.style('opacity', 0);
     }
 
     update() {
@@ -127,23 +141,13 @@ class ScatterPlot {
             .attr("cx", d => self.xscale(d.x))
             .attr("cy", d => self.yscale(d.y))
             .attr("r", d => d.r)
-            .style('fill', 'steelblue')  
-            .style('opacity', 0.7)       
+            .style('fill', 'steelblue')
+            .style('opacity', 0.7)
             .on('mouseover', (e, d) => {
-                self.tooltip
-                    .style('opacity', 1)
-                    .html(`<div class="tooltip-label">Position</div>(${d.x}, ${d.y})`)
-                    .style('background-color', 'lightsteelblue')
-                    .style('border-color', 'steelblue');
-            })
-            .on('mousemove', (e) => {
-                const padding = 10;
-                self.tooltip
-                    .style('left', (e.pageX + padding) + 'px')
-                    .style('top', (e.pageY + padding) + 'px');
+                self.showTooltip(d.x, d.y, 'Position');
             })
             .on('mouseleave', () => {
-                self.tooltip.style('opacity', 0);
+                self.hideTooltip();
             });
 
         self.xaxis_group
