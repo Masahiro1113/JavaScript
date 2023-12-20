@@ -88,7 +88,7 @@ class ScatterPlot {
             .attr("font-weight", "bold")
             .text("Y Label");
 
-        // ツールチップの追加
+        
         self.tooltip = d3.select(self.config.parent)
             .append('div')
             .attr('id', 'tooltip')
@@ -102,7 +102,8 @@ class ScatterPlot {
     }
 
     showTooltip(x, y, text) {
-        this.tooltip
+        const tooltip = d3.select('#tooltip');  // ツールチップの選択
+        tooltip
             .style('opacity', 1)
             .html(`<div class="tooltip-label">${text}</div>${x}, ${y}`)
             .style('background-color', 'lightsteelblue')
@@ -110,6 +111,7 @@ class ScatterPlot {
             .style('left', (d3.event.pageX + 10) + 'px')
             .style('top', (d3.event.pageY + 10) + 'px');
     }
+    
 
     hideTooltip() {
         this.tooltip.style('opacity', 0);
