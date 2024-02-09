@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>世界の電力消費量と人口</title>
+    <!-- Chart.jsを使用 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>世界の電力消費量と人口</h1>
+    <div style="width: 50%; float: left;">
+        <canvas id="energyChart" width="400" height="400"></canvas>
+    </div>
+    <div style="width: 50%; float: left;">
+        <canvas id="populationChart" width="400" height="400"></canvas>
+    </div>
+    <div>
+        <button onclick="changeData(2018)">2018年</button>
+        <button onclick="changeData(2019)">2019年</button>
+        <button onclick="changeData(2020)">2020年</button>
+        <button onclick="changeData(2021)">2021年</button>
+        <button onclick="changeData(2022)">2022年</button>
+    </div>
+
+    <script>
+        let energyData2018 = {
+            labels: ["中国", "アメリカ合衆国", "インド", "ロシア", "日本", "ドイツ"],
+            datasets: [{
+                label: '電力消費量（TWh）',
+                data: [6439, 4043, 1233, 926, 961, 522],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(54, 162, 235, 0.5)',
+                    'rgba(255, 206, 86, 0.5)',
+                    'rgba(75, 192, 192, 0.5)',
+                    'rgba(153, 102, 255, 0.5)',
+                    'rgba(255, 159, 64, 0.5)'
+                ],
+                borderWidth: 1
+            }]
+        };
+
+        let populationData2018 = {
+            labels: ["中国", "インド", "アメリカ合衆国", "ロシア", "日本", "ドイツ"],
+            datasets: [{
+                label: '人口（100万人）',
+                data: [1417.1, 1369, 332.1, 145.7, 126.7, 82.9],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(255, 206, 86, 0.5)',
+                    'rgba(54, 162, 235, 0.5)',
+                    'rgba(75, 192, 192, 0.5)',
+                    'rgba(153, 102, 255, 0.5)',
+                    'rgba(255, 159, 64, 0.5)'
+                ],
+                borderWidth: 1
+            }]
+        };
+
+        let energyData2019 = {
+            labels: ["中国", "アメリカ合衆国", "インド", "ロシア", "日本", "ドイツ"],
+            datasets: [{
+                label: '電力消費量（TWh）',
+                data: [6808, 3964, 1272, 931, 942, 508],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(54, 162, 235, 0.5)',
+                    'rgba(255, 206, 86, 0.5)',
+                    'rgba(75, 192, 192, 0.5)',
+                    'rgba(153, 102, 255, 0.5)',
+                    'rgba(255, 159, 64, 0.5)'
+                ],
+                borderWidth: 1
+            }]
+        };
+
+        let populationData2019 = {
+            labels: ["中国", "インド", "アメリカ合衆国", "ロシア", "日本", "ドイツ"],
+            datasets: [{
+                label: '人口（100万人）',
+                data: [1421.9, 1383.1, 334.3, 145.7, 126.6, 83.1],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(255, 206, 86, 0.5)',
+                    'rgba(54, 162, 235, 0.5)',
+                    'rgba(75, 192, 192, 0.5)',
+                    'rgba(153, 102, 255, 0.5)',
+                    'rgba(255, 159, 64, 0.5)'
+                ],
+                borderWidth: 1
+            }]
+        };
+
+        let energyData2020 = {
+            labels: ["中国", "アメリカ合衆国", "インド", "ロシア", "日本", "ドイツ"],
+            datasets: [{
+                label: '電力消費量（TWh）',
+                data: [7111, 3904, 1187, 915, 921, 493],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(54, 162, 235, 0.5)',
+                    'rgba(255, 206, 86, 0.5)',
+                    'rgba(75, 192, 192, 0.5)',
+                    'rgba(153, 102, 255, 0.5)',
+                    'rgba(255, 159, 64, 0.5)'
+                ],
+                borderWidth: 1
+            }]
+        };
+
+        let populationData2020 = {
+            labels: ["中国", "インド", "アメリカ合衆国", "ロシア", "日本", "ドイツ"],
+            datasets: [{
+                label: '人口（100万人）',
+                data: [1424.9, 1396.4, 335.9, 145.6, 126.1, 83.3],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(255, 206, 86, 0.5)',
+                    'rgba(54, 162, 235, 0.5)',
+                    'rgba(75, 192, 192, 0.5)',
+                    'rgba(153, 102, 255, 0.5)',
+                    'rgba(255, 159, 64, 0.5)'
+                ],
+                borderWidth: 1
+            }]
+        };
+
+        let energyData2021 = {
+            labels: ["中国", "アメリカ合衆国", "インド", "ロシア", "日本", "ドイツ"],
+            datasets: [{
+                label: '電力消費量（TWh）',
+                data: [7826, 3980, 1271, 965, 956, 505],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(54, 162, 235, 0.5)',
+                    'rgba(255, 206, 86, 0.5)',
+                    'rgba(75, 192, 192, 0.5)',
+                    'rgba(153, 102, 255, 0.5)',
+                    'rgba(255, 159, 64, 0.5)'
+                ],
+                borderWidth: 1
+            }]
+        };
+
+        let populationData2021 = {
+            labels: ["中国", "インド", "アメリカ合衆国", "ロシア", "日本", "ドイツ"],
+            datasets: [{
+                label: '人口（100万人）',
+                data: [1425.9, 1407.6, 337, 145.1, 125.5, 83.4],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(255, 206, 86, 0.5)',
+                    'rgba(54, 162, 235, 0.5)',
+                    'rgba(75, 192, 192, 0.5)',
+                    'rgba(153, 102, 255, 0.5)',
+                    'rgba(255, 159, 64, 0.5)'
+                ],
+                borderWidth: 1
+            }]
+        };
+
+        let energyData2022 = {
+            labels: ["中国", "アメリカ合衆国", "インド", "ロシア", "日本", "ドイツ"],
+            datasets: [{
+                label: '電力消費量（TWh）',
+                data: [8090, 4082, 1392, 979, 939, 490],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(54, 162, 235, 0.5)',
+                    'rgba(255, 206, 86, 0.5)',
+                    'rgba(75, 192, 192, 0.5)',
+                    'rgba(153, 102, 255, 0.5)',
+                    'rgba(255, 159, 64, 0.5)'
+                ],
+                borderWidth: 1
+            }]
+        };
+
+        let populationData2022 = {
+            labels: ["中国", "インド", "アメリカ合衆国", "ロシア", "日本", "ドイツ"],
+            datasets: [{
+                label: '人口（100万人）',
+                data: [1425.9, 1417.2, 338.3, 144.7, 124.3, 83.4],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(255, 206, 86, 0.5)',
+                    'rgba(54, 162, 235, 0.5)',
+                    'rgba(75, 192, 192, 0.5)',
+                    'rgba(153, 102, 255, 0.5)',
+                    'rgba(255, 159, 64, 0.5)'
+                ],
+                borderWidth: 1
+            }]
+        };
+
+        const energyCtx = document.getElementById('energyChart').getContext('2d');
+        const populationCtx = document.getElementById('populationChart').getContext('2d');
+        let energyChart;
+        let populationChart;
+
+        // 初期データの表示
+        window.onload = function() {
+            energyChart = new Chart(energyCtx, {
+                type: 'doughnut',
+                data: energyData2018
+            });
+
+            populationChart = new Chart(populationCtx, {
+                type: 'bar',
+                data: populationData2018,
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        };
+
+        // 年度別データの切り替え
+        function changeData(year) {
+            if (year === 2018) {
+                energyChart.data = energyData2018;
+                populationChart.data = populationData2018;
+            } else if (year === 2019) {
+                energyChart.data = energyData2019;
+                populationChart.data = populationData2019;
+            } else if (year === 2020) {
+                energyChart.data = energyData2020;
+                populationChart.data = populationData2020;
+            } else if (year === 2021) {
+                energyChart.data = energyData2021;
+                populationChart.data = populationData2021;
+            } else if (year === 2022) {
+                energyChart.data = energyData2022;
+                populationChart.data = populationData2022;
+            }
+            energyChart.update();
+            populationChart.update();
+        }
+    </script>
+</body>
+</html>
